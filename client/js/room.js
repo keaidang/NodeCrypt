@@ -131,6 +131,7 @@ export function joinRoom(userName, roomName, password, modal = null, onResult) {
 				if (loginContainer) loginContainer.style.display = 'none';
 				const chatContainer = $id('chat-container');
 				if (chatContainer) chatContainer.style.display = '';
+				document.body.classList.remove('login-page');
 			}
 			if (onResult && !closed) {
 				closed = true;

@@ -163,14 +163,6 @@
 	margin: 0 auto;
 }
 
-	/* Ensure main content fills the viewport when sidebars are hidden */
-	.container, .main, .chat-area {
-		padding: 0 !important;
-		margin: 0 !important;
-		width: 100vw !important;
-		max-width: 100vw !important;
-		box-sizing: border-box !important;
-	}
 
 	/* Reduce any extra gutters that could restrict the central column */
 	body, .container {

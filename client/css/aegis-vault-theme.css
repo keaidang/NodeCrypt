@@ -36,9 +36,11 @@ body, .login-page, .container {
     -webkit-backdrop-filter: blur(16px) !important;
 }
 
-.sidebar,
-.rightbar {
-    position: relative !important;
+@media (min-width: 769px) {
+    .sidebar,
+    .rightbar {
+        position: relative !important;
+    }
 }
 
 .flip-card-front,
@@ -248,6 +250,42 @@ h1, h2, h3, h4,
 
 .help-btn:hover, .settings-back-btn:hover, .settings-btn:hover, .settings-close:hover {
     background: rgba(0, 231, 255, 0.15) !important;
+}
+
+/* 15b. Help Content Sci-Fi HUD Styling */
+.help-content {
+    color: rgba(165, 243, 252, 0.8) !important;
+    flex: 1 !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    margin-bottom: 10px !important;
+}
+
+.help-section h3 {
+    color: var(--neon-cyan) !important;
+    text-shadow: 0 0 6px rgba(0, 231, 255, 0.3) !important;
+}
+
+.help-section p,
+.help-section ol,
+.help-section ul,
+.help-section li {
+    color: rgba(165, 243, 252, 0.72) !important;
+}
+
+.help-section li strong,
+.help-important strong {
+    color: var(--neon-cyan) !important;
+    text-shadow: 0 0 6px rgba(0, 231, 255, 0.3) !important;
+}
+
+.help-important {
+    border-left: 2px solid rgba(0, 231, 255, 0.3) !important;
+    background: rgba(0, 231, 255, 0.03) !important;
+    padding: 8px 12px !important;
+    border-radius: 4px !important;
+    margin-top: 14px !important;
+    color: rgba(165, 243, 252, 0.75) !important;
 }
 
 .mobile-menu-btn, .mobile-info-btn {
@@ -747,7 +785,7 @@ emoji-picker {
 /* 17. Application Logo Title Styling */
 .app-header-logo {
     text-align: center !important;
-    margin-top: 10px !important;
+    margin-top: 60px !important;
     margin-bottom: 30px !important;
     display: flex !important;
     flex-direction: column !important;
@@ -790,8 +828,10 @@ emoji-picker {
 }
 
 /* 18. E2EE Status Indicator Badge */
-.chat-input-area {
-    position: relative;
+@media (min-width: 769px) {
+    .chat-input-area {
+        position: relative;
+    }
 }
 
 .e2ee-status-badge {
