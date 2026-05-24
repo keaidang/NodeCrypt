@@ -36,7 +36,7 @@
 		<!-- 应用程序标题 -->
 		<div class="app-header-logo">
 			<h1 class="app-title-main">AEGIS CHAT</h1>
-			<p class="app-subtitle-bottom">端到端加密聊天，零知识 本地加密 极简的选择</p>
+			<p class="app-subtitle-bottom">端到端加密聊天，零信任 高可用 极简化</p>
 		</div>
 		<!-- 翻转卡片容器 -->
 		<div class="flip-card" id="flip-card">
@@ -167,7 +167,13 @@
 			<div class="main-header" id="main-header"> </div>
 			<div class="chat-area" id="chat-area"> </div>
 			<div class="chat-input-area">
-				<div class="rows-wrapper chat-input-wrapper chat-input-main-wrapper chat-rows-wrapper">					<div class="new-message-wrapper rows-wrapper-row" data-offset="commands"> <button class="chat-emoji-btn" type="button" title=""> <svg width="30px" height="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<div class="rows-wrapper chat-input-wrapper chat-input-main-wrapper chat-rows-wrapper">
+					<!-- E2EE Status Indicator Badge -->
+					<div class="e2ee-status-badge">
+						<span class="e2ee-dot disconnected"></span>
+						<span class="e2ee-text" data-i18n="ui.e2ee_disconnected">CONNECTION DISCONNECTED</span>
+					</div>
+					<div class="new-message-wrapper rows-wrapper-row" data-offset="commands"> <button class="chat-emoji-btn" type="button" title=""> <svg width="30px" height="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 								<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
 								<g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
 								<g id="SVGRepo_iconCarrier">

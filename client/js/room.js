@@ -7,7 +7,8 @@ import {
 import {
 	renderChatArea,
 	addSystemMsg,
-	updateChatInputStyle
+	updateChatInputStyle,
+	updateE2EEStatus
 } from './chat.js';
 import {
 	renderMainHeader,
@@ -57,7 +58,8 @@ export function switchRoom(index) {
 	renderMainHeader();
 	renderUserList(false);
 	renderChatArea();
-	updateChatInputStyle()
+	updateChatInputStyle();
+	updateE2EEStatus(!!rd.isSecured)
 }
 
 // Set the sidebar avatar
@@ -109,20 +111,26 @@ export function joinRoom(userName, roomName, password, modal = null, onResult) {
 	let closed = false;
 	const callbacks = {
 		onServerClosed: () => {
-			setStatus('Node connection closed');
+			console.log('Node connection closed');
+			newRd.isSecured = false;
+			if (roomsData[activeRoomIndex] === newRd) {
+				updateE2EEStatus(false);
+			}
 			if (onResult && !closed) {
 				closed = true;
 				onResult(false)
 			}
 		},		onServerSecured: () => {
+			newRd.isSecured = true;
+			if (roomsData[activeRoomIndex] === newRd) {
+				updateE2EEStatus(true);
+			}
 			if (modal) modal.remove();
 			else {
 				const loginContainer = $id('login-container');
 				if (loginContainer) loginContainer.style.display = 'none';
 				const chatContainer = $id('chat-container');
 				if (chatContainer) chatContainer.style.display = '';
-				
-
 			}
 			if (onResult && !closed) {
 				closed = true;

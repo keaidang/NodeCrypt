@@ -33,6 +33,13 @@ const LANGUAGES = {
 			'ui.me': ' (me)',
 			'ui.anonymous': 'Anonymous',
 			'ui.start_private_chat': 'Select for private chat',
+			'ui.e2ee_active': 'ECDH-AES-256 SECURE E2EE ACTIVE',
+			'ui.e2ee_disconnected': 'CONNECTION DISCONNECTED / SECURED E2EE SUSPENDED',
+			'ui.quick_access': 'Quick Access',
+			'ui.quick_private': 'Quick (Private)',
+			'ui.quick_public': 'Quick (Public)',
+			'ui.quick_private_desc': 'Generate a unique encrypted room',
+			'ui.quick_public_desc': 'Join the public lobby',
 			
 			// Settings panel
 			'settings.title': 'Settings',
@@ -157,6 +164,13 @@ const LANGUAGES = {
 			'ui.me': '（我）',
 			'ui.anonymous': '匿名用户',
 			'ui.start_private_chat': '选择用户开始私信',
+			'ui.e2ee_active': 'ECDH-AES-256 安全端到端加密已启用',
+			'ui.e2ee_disconnected': '连接已断开 / 安全加密已暂停',
+			'ui.quick_access': '快速通道',
+			'ui.quick_private': '快速（加密）',
+			'ui.quick_public': '快速（公开）',
+			'ui.quick_private_desc': '生成独立加密房间',
+			'ui.quick_public_desc': '加入公共大厅',
 			
 			// Settings panel
 			'settings.title': '设置',

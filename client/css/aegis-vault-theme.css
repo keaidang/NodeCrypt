@@ -36,6 +36,11 @@ body, .login-page, .container {
     -webkit-backdrop-filter: blur(16px) !important;
 }
 
+.sidebar,
+.rightbar {
+    position: relative !important;
+}
+
 .flip-card-front,
 .flip-card-back,
 .login-modal-card {
@@ -689,4 +694,197 @@ emoji-picker {
     max-width: 380px !important;
     line-height: 1.5 !important;
     font-family: 'Noto Sans SC', sans-serif !important;
+}
+
+/* 18. E2EE Status Indicator Badge */
+.chat-input-area {
+    position: relative;
+}
+
+.e2ee-status-badge {
+    position: absolute !important;
+    bottom: 100% !important;
+    left: 20px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    background: rgba(8, 14, 26, 0.85) !important;
+    border: 1px solid rgba(0, 231, 255, 0.22) !important;
+    border-bottom: none !important;
+    padding: 4px 10px !important;
+    border-radius: 6px 6px 0 0 !important;
+    font-family: 'Orbitron', sans-serif !important;
+    font-size: 0.65rem !important;
+    letter-spacing: 0.08em !important;
+    color: rgb(103, 232, 249) !important;
+    box-shadow: 0 -4px 10px rgba(0, 231, 255, 0.04) !important;
+    z-index: 4 !important;
+    margin-bottom: -1px !important;
+}
+
+.e2ee-dot {
+    width: 6px;
+    height: 6px;
+    background-color: #00ff66 !important;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #00ff66 !important;
+    animation: e2ee-glow 1.5s infinite alternate !important;
+}
+
+@keyframes e2ee-glow {
+    from {
+        opacity: 0.4;
+        box-shadow: 0 0 2px #00ff66;
+    }
+    to {
+        opacity: 1;
+        box-shadow: 0 0 10px #00ff66;
+    }
+}
+
+.chat-input-area.private-mode .e2ee-status-badge {
+    border-color: rgba(189, 0, 255, 0.35) !important;
+    color: #e2abff !important;
+}
+
+.chat-input-area.private-mode .e2ee-dot {
+    background-color: var(--neon-purple) !important;
+    box-shadow: 0 0 8px var(--neon-purple) !important;
+    animation: e2ee-purple-glow 1.5s infinite alternate !important;
+}
+
+@keyframes e2ee-purple-glow {
+    from {
+        opacity: 0.4;
+        box-shadow: 0 0 2px var(--neon-purple);
+    }
+    to {
+        opacity: 1;
+        box-shadow: 0 0 10px var(--neon-purple);
+    }
+}
+
+.e2ee-dot.disconnected,
+.chat-input-area.private-mode .e2ee-dot.disconnected {
+    background-color: #ff335f !important;
+    box-shadow: 0 0 8px #ff335f !important;
+    animation: e2ee-red-glow 1.5s infinite alternate !important;
+}
+
+@keyframes e2ee-red-glow {
+    from {
+        opacity: 0.4;
+        box-shadow: 0 0 2px #ff335f;
+    }
+    to {
+        opacity: 1;
+        box-shadow: 0 0 10px #ff335f;
+    }
+}
+
+/* 19. Cyberpunk HUD Panel Corner Markers */
+.flip-card-front::before,
+.login-modal-card::before,
+.sidebar::before,
+.settings-sidebar::before,
+.rightbar::before {
+    content: "" !important;
+    position: absolute !important;
+    top: 8px !important;
+    left: 8px !important;
+    width: 8px !important;
+    height: 8px !important;
+    border-top: 1.5px solid rgba(0, 231, 255, 0.5) !important;
+    border-left: 1.5px solid rgba(0, 231, 255, 0.5) !important;
+    pointer-events: none !important;
+    z-index: 10 !important;
+}
+
+.flip-card-front::after,
+.login-modal-card::after,
+.sidebar::after,
+.settings-sidebar::after,
+.rightbar::after {
+    content: "" !important;
+    position: absolute !important;
+    bottom: 8px !important;
+    right: 8px !important;
+    width: 8px !important;
+    height: 8px !important;
+    border-bottom: 1.5px solid rgba(0, 231, 255, 0.5) !important;
+    border-right: 1.5px solid rgba(0, 231, 255, 0.5) !important;
+    pointer-events: none !important;
+    z-index: 10 !important;
+}
+
+.flip-card-back::before {
+    content: "" !important;
+    position: absolute !important;
+    top: 8px !important;
+    left: 8px !important;
+    width: 8px !important;
+    height: 8px !important;
+    border-top: 1.5px solid rgba(0, 231, 255, 0.5) !important;
+    border-left: 1.5px solid rgba(0, 231, 255, 0.5) !important;
+    pointer-events: none !important;
+    z-index: 10 !important;
+}
+
+.flip-card-back::after {
+    content: "" !important;
+    position: absolute !important;
+    bottom: 8px !important;
+    right: 8px !important;
+    width: 8px !important;
+    height: 8px !important;
+    border-bottom: 1.5px solid rgba(0, 231, 255, 0.5) !important;
+    border-right: 1.5px solid rgba(0, 231, 255, 0.5) !important;
+    pointer-events: none !important;
+    z-index: 10 !important;
+}
+
+/* 20. Scanning CRT Line & Grid overlay */
+body::before {
+    content: "" !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    background: 
+        repeating-linear-gradient(0deg, rgba(0, 231, 255, 0.015) 0px, rgba(0, 231, 255, 0.015) 1px, transparent 1px, transparent 3px),
+        repeating-linear-gradient(90deg, rgba(0, 231, 255, 0.01) 0px, rgba(0, 231, 255, 0.01) 1px, transparent 1px, transparent 40px) !important;
+    pointer-events: none !important;
+    z-index: 99999 !important;
+}
+
+/* 21. Smooth Message Bubble Slide-In Animation */
+@keyframes bubble-appear-me {
+    from {
+        opacity: 0;
+        transform: translateY(12px) translateX(8px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) translateX(0) scale(1);
+    }
+}
+
+@keyframes bubble-appear-other {
+    from {
+        opacity: 0;
+        transform: translateY(12px) translateX(-8px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) translateX(0) scale(1);
+    }
+}
+
+.bubble.me {
+    animation: bubble-appear-me 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) forwards !important;
+}
+
+.bubble.other, .bubble-other-wrap {
+    animation: bubble-appear-other 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) forwards !important;
 }

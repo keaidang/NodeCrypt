@@ -487,3 +487,21 @@ export function setupInputPlaceholder() {
 	autoGrowInput();
 	updateChatInputStyle()
 }
+
+// Update E2EE Status Badge state (connected/disconnected)
+// 更新端到端加密状态面板的状态（已连接/已断开）
+export function updateE2EEStatus(isConnected) {
+	const e2eeDot = $('.e2ee-dot');
+	const e2eeText = $('.e2ee-text');
+	if (!e2eeDot || !e2eeText) return;
+
+	if (isConnected) {
+		e2eeDot.classList.remove('disconnected');
+		e2eeText.setAttribute('data-i18n', 'ui.e2ee_active');
+		e2eeText.textContent = t('ui.e2ee_active', 'ECDH-AES-256 SECURE E2EE ACTIVE');
+	} else {
+		e2eeDot.classList.add('disconnected');
+		e2eeText.setAttribute('data-i18n', 'ui.e2ee_disconnected');
+		e2eeText.textContent = t('ui.e2ee_disconnected', 'CONNECTION DISCONNECTED');
+	}
+}
