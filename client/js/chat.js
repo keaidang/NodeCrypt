@@ -502,6 +502,6 @@ export function updateE2EEStatus(isConnected) {
 	} else {
 		e2eeDot.classList.add('disconnected');
 		e2eeText.setAttribute('data-i18n', 'ui.e2ee_disconnected');
-		e2eeText.textContent = t('ui.e2ee_disconnected', 'CONNECTION DISCONNECTED');
+		e2eeText.textContent = t('ui.e2ee_disconnected', 'CONNECTION DISCONNECTED / SECURED E2EE SUSPENDED');
 	}
 }

@@ -58,6 +58,37 @@ function simpleDecrypt(encrypted) {
 	}
 }
 
+// Generate a random alphanumeric string for quick access rooms
+// 用于快速通道的随机字符串生成
+function generateRandomString(length) {
+	const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789';
+	const arr = new Uint8Array(length);
+	crypto.getRandomValues(arr);
+	return Array.from(arr, v => chars[v % chars.length]).join('');
+}
+
+export function handleQuickPrivate() {
+	const userName = 'U_' + generateRandomString(8);
+	const roomName = 'R_' + generateRandomString(8);
+	const password = generateRandomString(12);
+	window.joinRoom(userName, roomName, password, null, function(success) {
+		if (!success) {
+			console.log('Quick private room join failed');
+		}
+	});
+}
+
+export function handleQuickPublic() {
+	const userName = 'U_' + generateRandomString(8);
+	const roomName = 'PublicLobby';
+	const password = 'PublicPass';
+	window.joinRoom(userName, roomName, password, null, function(success) {
+		if (!success) {
+			console.log('Quick public room join failed');
+		}
+	});
+}
+
 // Validate room data
 // 验证房间数据
 function validateRoomData(roomData) {
@@ -468,7 +499,7 @@ export function loginFormHandler(modal) {
 // Generate login form HTML
 export function generateLoginForm(isModal = false) {
 	const idPrefix = isModal ? '-modal' : '';
-	return `		<div class="input-group">
+	let html = `		<div class="input-group">
 			<input id="userName${idPrefix}" type="text" autocomplete="username" required minlength="1" maxlength="15" placeholder="">
 			<label for="userName${idPrefix}" class="floating-label">${t('ui.username', 'Username')}</label>
 		</div>
@@ -482,6 +513,30 @@ export function generateLoginForm(isModal = false) {
 		</div>
 		<button type="submit" class="login-btn">${t('ui.enter', 'ENTER')}</button>
 	`;
+
+	if (!isModal) {
+		html += `
+		<div class="quick-access-divider">
+			<span class="quick-access-line"></span>
+			<span class="quick-access-label" data-i18n="ui.quick_access">${t('ui.quick_access', 'Quick Access')}</span>
+			<span class="quick-access-line"></span>
+		</div>
+		<div class="quick-access-buttons">
+			<button type="button" id="btn-quick-private" class="btn-quick-access btn-quick-private">
+				<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C9.24 2 7 4.24 7 7V10H6C4.9 10 4 10.9 4 12V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V12C20 10.9 19.1 10 18 10H17V7C17 4.24 14.76 2 12 2ZM12 4C13.66 4 15 5.34 15 7V10H9V7C9 5.34 10.34 4 12 4ZM12 14C13.1 14 14 14.9 14 16C14 17.1 13.1 18 12 18C10.9 18 10 17.1 10 16C10 14.9 10.9 14 12 14Z" fill="currentColor"/></svg>
+				<span>${t('ui.quick_private', 'Quick (Private)')}</span>
+				<small>${t('ui.quick_private_desc', 'Generate a unique encrypted room')}</small>
+			</button>
+			<button type="button" id="btn-quick-public" class="btn-quick-access btn-quick-public">
+				<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM11 19.93C7.05 19.44 4 16.08 4 12C4 11.38 4.08 10.79 4.21 10.21L9 15V16C9 17.1 9.9 18 11 18V19.93ZM17.9 17.39C17.64 16.58 16.9 16 16 16H15V13C15 12.45 14.55 12 14 12H8V10H10C10.55 10 11 9.55 11 9V7H13C14.1 7 15 6.1 15 5V4.59C17.93 5.78 20 8.65 20 12C20 14.08 19.2 15.97 17.9 17.39Z" fill="currentColor"/></svg>
+				<span>${t('ui.quick_public', 'Quick (Public)')}</span>
+				<small>${t('ui.quick_public_desc', 'Join the public lobby')}</small>
+			</button>
+		</div>
+		`;
+	}
+
+	return html;
 }
 export function openLoginModal() {
 	const modal = document.createElement('div');
@@ -742,5 +797,15 @@ document.addEventListener('click', (e) => {
 	} else if (currentPopover && !currentPopover.contains(e.target)) {
 		currentPopover.remove();
 		currentPopover = null;
+	}
+});
+
+document.addEventListener('click', (e) => {
+	if (e.target.closest('#btn-quick-private')) {
+		e.preventDefault();
+		handleQuickPrivate();
+	} else if (e.target.closest('#btn-quick-public')) {
+		e.preventDefault();
+		handleQuickPublic();
 	}
 });

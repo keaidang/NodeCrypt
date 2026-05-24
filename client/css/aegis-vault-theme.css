@@ -144,6 +144,101 @@ h1, h2, h3, h4,
     box-shadow: 0 2px 8px rgba(0, 231, 255, 0.2) !important;
 }
 
+/* 17b. Quick Access Buttons */
+.quick-access-divider {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    margin: 20px 0 16px !important;
+    width: 100% !important;
+}
+.quick-access-line {
+    flex: 1 !important;
+    height: 1px !important;
+    background: linear-gradient(90deg, transparent, rgba(0, 231, 255, 0.3), transparent) !important;
+}
+.quick-access-label {
+    font-family: 'Orbitron', sans-serif !important;
+    font-size: 0.65rem !important;
+    letter-spacing: 0.15em !important;
+    color: rgba(103, 232, 249, 0.6) !important;
+    text-transform: uppercase !important;
+    white-space: nowrap !important;
+}
+.quick-access-buttons {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 10px !important;
+    width: 100% !important;
+}
+.btn-quick-access {
+    flex: 1 1 calc(50% - 5px) !important;
+    min-width: 140px !important;
+    min-height: 92px !important;
+    flex: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 4px !important;
+    padding: 14px 10px !important;
+    border-radius: 10px !important;
+    border: 1px solid rgba(0, 231, 255, 0.25) !important;
+    background: rgba(0, 231, 255, 0.06) !important;
+    color: #00e7ff !important;
+    cursor: pointer !important;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+    font-family: 'Orbitron', 'Noto Sans SC', sans-serif !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+.btn-quick-access span {
+    font-size: 0.78rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.08em !important;
+}
+.btn-quick-access small {
+    font-size: 0.62rem !important;
+    color: rgba(103, 232, 249, 0.5) !important;
+    font-family: 'Noto Sans SC', sans-serif !important;
+    letter-spacing: 0.02em !important;
+}
+.btn-quick-access svg {
+    margin-bottom: 2px !important;
+}
+.btn-quick-access:hover {
+    background: rgba(0, 231, 255, 0.14) !important;
+    border-color: rgba(0, 231, 255, 0.5) !important;
+    box-shadow: 0 0 18px rgba(0, 231, 255, 0.2), inset 0 0 12px rgba(0, 231, 255, 0.04) !important;
+    transform: translateY(-2px) !important;
+}
+.btn-quick-access:active {
+    transform: translateY(1px) scale(0.98) !important;
+    box-shadow: 0 0 8px rgba(0, 231, 255, 0.15) !important;
+}
+.btn-quick-private {
+    border-color: rgba(0, 231, 255, 0.25) !important;
+}
+.btn-quick-private:hover {
+    border-color: rgba(0, 231, 255, 0.6) !important;
+    box-shadow: 0 0 20px rgba(0, 231, 255, 0.25), inset 0 0 12px rgba(0, 231, 255, 0.05) !important;
+}
+.btn-quick-public {
+    border-color: rgba(189, 0, 255, 0.25) !important;
+    color: #e2abff !important;
+    background: rgba(189, 0, 255, 0.06) !important;
+}
+.btn-quick-public small {
+    color: rgba(189, 0, 255, 0.45) !important;
+}
+.btn-quick-public:hover {
+    background: rgba(189, 0, 255, 0.14) !important;
+    border-color: rgba(189, 0, 255, 0.55) !important;
+    box-shadow: 0 0 20px rgba(189, 0, 255, 0.2), inset 0 0 12px rgba(189, 0, 255, 0.05) !important;
+}
+.btn-quick-public:active {
+    box-shadow: 0 0 8px rgba(189, 0, 255, 0.15) !important;
+}
+
 .help-btn, .settings-back-btn, .settings-btn, .settings-close, .mobile-menu-btn, .mobile-info-btn, .more-btn {
     color: var(--neon-cyan) !important;
 }
