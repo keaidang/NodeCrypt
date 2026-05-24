@@ -1,4 +1,4 @@
-# NodeCrypt
+# AegisChat
 
 🌐 **[English README](README_EN.md)**
 
@@ -7,15 +7,15 @@
 ### 一键部署到 Cloudflare Workers
 
 点击下方按钮即可一键部署到 Cloudflare Workers：
-[![Deploy to Cloudflare Workers](https://deploy.workers.cloudflare.com/button?projectName=NodeCrypt)](https://deploy.workers.cloudflare.com/?url=https://github.com/shuaiplus/nodecrypt)
+[![Deploy to Cloudflare Workers](https://deploy.workers.cloudflare.com/button?projectName=AegisChat)](https://deploy.workers.cloudflare.com/?url=https://github.com/keaidang/NodeCrypt)
 
-- 构建命令：npm run build
-- 部署命令：npm run deploy
+- 构建命令: npm run build
+- 部署命令: npm run deploy
 - 
 
 ## 📝 项目简介
 
-NodeCrypt 是一个真正的端到端加密聊天系统，实现完全的零知识架构。整个系统设计确保服务器、网络中间人、甚至系统管理员都无法获取任何明文消息内容。所有加密和解密操作都在客户端本地进行，服务器仅作为加密数据的盲中继。
+AegisChat 是一个真正的端到端加密聊天系统，实现完全的零知识架构。整个系统设计确保服务器、网络中间人、甚至系统管理员都无法获取任何明文消息内容。所有加密和解密操作都在客户端本地进行，服务器仅作为加密数据的盲中继。
 
 ### 系统架构
 - **前端**：ES6+ 模块化 JavaScript，无框架依赖
@@ -150,8 +150,8 @@ sequenceDiagram
 ---
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=shuaiplus/NodeCrypt&type=Timeline)](https://www.star-history.com/#shuaiplus/NodeCrypt&Timeline)
+[![Star History Chart](https://api.star-history.com/svg?repos=keaidang/NodeCrypt&type=Timeline)](https://www.star-history.com/#keaidang/NodeCrypt&Timeline)
 
-**NodeCrypt** - 真正的端到端加密通信 🔐
+**AegisChat** - 真正的端到端加密通信 🔐
 
 *"在数字时代，加密是保护隐私的最后一道防线"*

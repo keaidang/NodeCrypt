@@ -1,5 +1,5 @@
 {
-  "name": "nodecrypt",
+  "name": "aegischat",
   "version": "1.0.0",
   "description": "端到端加密房间",
   "main": "worker/index.js",

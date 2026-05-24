@@ -1,0 +1,692 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Noto+Sans+SC:wght@400;500;700&display=swap');
+
+:root {
+    --neon-cyan: #00e7ff;
+    --neon-red: #ff335f;
+    --bg-dark: #02060d;
+    --panel-bg: rgba(8, 14, 26, 0.76);
+    --panel-border: rgba(0, 231, 255, 0.32);
+}
+
+/* 1. Global Reset & Backgrounds */
+body, .login-page, .container {
+    background:
+        radial-gradient(circle at top, rgba(0, 231, 255, 0.14), transparent 34%),
+        radial-gradient(circle at bottom right, rgba(255, 51, 95, 0.12), transparent 28%),
+        linear-gradient(180deg, #07101e 0%, var(--bg-dark) 58%, #010308 100%) !important;
+    color: var(--neon-cyan) !important;
+    font-family: 'Noto Sans SC', sans-serif !important;
+}
+
+/* Override wallpaper filter */
+.main::before {
+    display: none !important;
+}
+
+/* 2. Panels (Glassmorphism) */
+.sidebar,
+.settings-sidebar,
+.rightbar,
+.main-header,
+.avatar-color-picker-popover {
+    background: var(--panel-bg) !important;
+    border: 1px solid var(--panel-border) !important;
+    box-shadow: 0 0 18px rgba(0, 231, 255, 0.14), inset 0 0 12px rgba(0, 231, 255, 0.05), 0 16px 60px rgba(0, 0, 0, 0.28) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+}
+
+.flip-card-front,
+.flip-card-back,
+.login-modal-card {
+    background: rgba(8, 14, 26, 0.85) !important;
+    border: 1px solid rgba(0, 231, 255, 0.25) !important;
+    box-shadow: 0 0 30px rgba(0, 231, 255, 0.1), inset 0 0 15px rgba(0, 231, 255, 0.03), 0 16px 60px rgba(0, 0, 0, 0.5) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    padding: 38px 28px 24px !important;
+}
+
+/* 3. Typography & Titles */
+h1, h2, h3, h4,
+.settings-title,
+.group-title,
+.sidebar-username,
+.member-name,
+.section-title {
+    font-family: 'Orbitron', 'Noto Sans SC', sans-serif !important;
+    color: rgb(103, 232, 249) !important;
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    -webkit-text-fill-color: unset !important;
+    text-shadow: 0 0 8px rgba(0, 231, 255, 0.3) !important;
+}
+
+.subtips, .settings-item-description, .room .lastmsg, .room .time, .bubble-meta {
+    color: rgba(103, 232, 249, 0.6) !important;
+}
+
+/* Spacing adjustments to prevent layout from being cramped */
+.login-container form,
+.login-modal-card form {
+    gap: 28px !important;
+}
+
+.input-group {
+    margin-bottom: 12px !important;
+    width: 100% !important;
+}
+
+/* 4. Form inputs & labels */
+.input-group input {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    border: 1px solid rgba(0, 231, 255, 0.22) !important;
+    background: rgba(2, 6, 13, 0.6) !important;
+    color: #e6faff !important;
+    border-radius: 10px !important;
+    padding: 13px 16px !important;
+    font-size: 1rem !important;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+}
+
+.input-group input:focus {
+    border-color: rgba(0, 231, 255, 0.8) !important;
+    box-shadow: 0 0 15px rgba(0, 231, 255, 0.3), inset 0 1px 2px rgba(0, 0, 0, 0.4) !important;
+    background: rgba(2, 6, 13, 0.8) !important;
+}
+
+.input-group .floating-label {
+    color: rgba(0, 231, 255, 0.5) !important;
+    font-size: 1rem !important;
+    top: 14px !important;
+    left: 16px !important;
+    transition: 0.25s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+}
+
+.input-group input:focus + .floating-label,
+.input-group input:not(:placeholder-shown) + .floating-label {
+    color: #00e7ff !important;
+    text-shadow: 0 0 8px rgba(0, 231, 255, 0.4) !important;
+    transform: translateY(-34px) scale(0.8) !important;
+    transform-origin: top left !important;
+}
+
+/* 5. Buttons */
+.login-btn, .btn-neon {
+    background: linear-gradient(135deg, rgba(0, 231, 255, 0.15) 0%, rgba(0, 168, 255, 0.05) 100%) !important;
+    border: 1px solid rgba(0, 231, 255, 0.5) !important;
+    color: #00e7ff !important;
+    border-radius: 12px !important;
+    font-weight: 700 !important;
+    letter-spacing: 2px !important;
+    text-transform: uppercase !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+    text-shadow: 0 0 8px rgba(0, 231, 255, 0.6) !important;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+}
+
+.login-btn:hover, .btn-neon:hover {
+    background: linear-gradient(135deg, rgba(0, 231, 255, 0.25) 0%, rgba(0, 168, 255, 0.1) 100%) !important;
+    border-color: #00e7ff !important;
+    box-shadow: 0 0 20px rgba(0, 231, 255, 0.4), 0 4px 15px rgba(0, 231, 255, 0.1) !important;
+    transform: translateY(-1px) !important;
+}
+
+.login-btn:active, .btn-neon:active {
+    transform: translateY(1px) !important;
+    box-shadow: 0 2px 8px rgba(0, 231, 255, 0.2) !important;
+}
+
+.help-btn, .settings-back-btn, .settings-btn, .settings-close, .mobile-menu-btn, .mobile-info-btn, .more-btn {
+    color: var(--neon-cyan) !important;
+}
+
+.help-btn svg, .settings-back-btn svg, .settings-btn svg, .settings-close svg, .mobile-menu-btn svg, .mobile-info-btn svg, .more-btn svg {
+    stroke: var(--neon-cyan) !important;
+    fill: none !important;
+}
+
+.help-btn:hover, .settings-back-btn:hover, .settings-btn:hover, .settings-close:hover {
+    background: rgba(0, 231, 255, 0.15) !important;
+}
+
+.mobile-menu-btn, .mobile-info-btn {
+    background: rgba(8, 14, 26, 0.6) !important;
+    border: 1px solid rgba(0, 231, 255, 0.3) !important;
+    box-shadow: 0 0 10px rgba(0, 231, 255, 0.15) !important;
+}
+
+.mobile-menu-btn:hover, .mobile-info-btn:hover {
+    background: rgba(0, 231, 255, 0.15) !important;
+    border-color: rgba(0, 231, 255, 0.6) !important;
+    box-shadow: 0 0 15px rgba(0, 231, 255, 0.3) !important;
+}
+
+/* 6. Sidebar, Room List & Members */
+.sidebar-user, .settings-header, .sidebar .join-room, .rightbar-header, .rightbar-tabs {
+    background: rgba(0, 231, 255, 0.02) !important;
+    border-bottom: 1px solid rgba(0, 231, 255, 0.15) !important;
+    color: var(--neon-cyan) !important;
+}
+
+.sidebar .join-room {
+    justify-content: center !important;
+}
+
+.sidebar .join-room svg {
+    fill: var(--neon-cyan) !important;
+}
+
+.rooms, .members {
+    background: transparent !important;
+}
+
+.room, .member {
+    background: rgba(0, 231, 255, 0.04) !important;
+    border: 1px solid rgba(0, 231, 255, 0.12) !important;
+    color: #9be8ef !important;
+    border-radius: 10px !important;
+}
+
+.room.active, .member.private-chat-active {
+    background: rgba(0, 231, 255, 0.12) !important;
+    border-color: rgba(0, 231, 255, 0.56) !important;
+    color: var(--neon-cyan) !important;
+    box-shadow: inset 0 0 14px rgba(0, 231, 255, 0.08) !important;
+}
+
+.room:hover:not(.active), .member:hover {
+    background: rgba(0, 231, 255, 0.08) !important;
+}
+
+/* Sidebar & Rightbar texts visibility overrides */
+.rightbar .group-info .title {
+    color: rgb(103, 232, 249) !important;
+    font-family: 'Orbitron', 'Noto Sans SC', sans-serif !important;
+    font-size: 1.1rem !important;
+}
+
+.rightbar .group-info .group-desc {
+    color: rgba(103, 232, 249, 0.6) !important;
+}
+
+.rightbar .tabs div {
+    color: rgba(103, 232, 249, 0.7) !important;
+    border-bottom-color: rgba(0, 231, 255, 0.15) !important;
+}
+
+.rightbar .tabs .active {
+    color: rgb(103, 232, 249) !important;
+    border-bottom: 2px solid rgb(103, 232, 249) !important;
+    background: transparent !important;
+}
+
+.member .member-status {
+    color: var(--neon-cyan) !important;
+}
+
+.member-tip {
+    color: rgba(103, 232, 249, 0.5) !important;
+}
+
+.main-header-members {
+    color: rgba(103, 232, 249, 0.6) !important;
+}
+
+/* 7. Chat Main Area */
+.main {
+    background: transparent;
+}
+
+/* Chat Input Field */
+.chat-input-wrapper {
+    border: 1px solid var(--panel-border) !important;
+    background: var(--panel-bg) !important;
+    backdrop-filter: blur(16px) !important;
+    box-shadow: 0 0 18px rgba(0, 231, 255, 0.14) !important;
+}
+
+.chat-input-wrapper::before {
+    display: none !important;
+}
+
+.input-message-input {
+    color: var(--neon-cyan) !important;
+}
+
+.input-field-placeholder {
+    color: rgba(0, 231, 255, 0.4) !important;
+}
+
+.chat-emoji-btn, .chat-attach-btn-abs {
+    color: rgba(0, 231, 255, 0.6) !important;
+}
+
+.chat-emoji-btn:hover, .chat-attach-btn-abs:hover {
+    color: var(--neon-cyan) !important;
+    background: rgba(0, 231, 255, 0.1) !important;
+}
+
+/* 8. Chat Bubbles */
+.bubble.me {
+    background: linear-gradient(135deg, rgba(8, 14, 26, 0.8) 0%, rgba(0, 231, 255, 0.18) 100%) !important;
+    border: 1px solid rgba(0, 231, 255, 0.4) !important;
+    color: #e6faff !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25) !important;
+}
+
+.bubble.me .bubble-meta {
+    color: rgba(103, 232, 249, 0.7) !important;
+}
+
+.bubble.other {
+    background: rgba(8, 14, 26, 0.82) !important;
+    border: 1px solid rgba(0, 231, 255, 0.22) !important;
+    color: #e6faff !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+}
+
+.bubble.other .bubble-other-name {
+    color: rgb(103, 232, 249) !important;
+}
+
+.bubble.other .bubble-meta {
+    color: rgba(103, 232, 249, 0.6) !important;
+}
+
+.bubble.system {
+    background: rgba(8, 14, 26, 0.8) !important;
+    border: 1px solid rgba(0, 231, 255, 0.2) !important;
+    color: rgb(103, 232, 249) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* 9. Settings Content Adjustments */
+.settings-content {
+    background: transparent !important;
+}
+
+.settings-section-title {
+    color: var(--neon-cyan) !important;
+    border-bottom: 1px solid rgba(0, 231, 255, 0.2) !important;
+}
+
+.settings-item, .settings-item-label {
+    color: #9be8ef !important;
+}
+
+.language-select {
+    background: rgba(8, 14, 26, 0.76) !important;
+    border: 1px solid rgba(0, 231, 255, 0.3) !important;
+    color: var(--neon-cyan) !important;
+}
+
+.language-select option {
+    background: #08111f !important;
+    color: #dffcff !important;
+}
+
+.theme-selector {
+    background: rgba(0, 231, 255, 0.05) !important;
+    border: 1px solid rgba(0, 231, 255, 0.15) !important;
+}
+
+/* Modal overlays */
+.login-modal-bg {
+    background: rgba(2, 6, 13, 0.6) !important;
+    backdrop-filter: blur(12px) !important;
+}
+
+/* Slider / Switch */
+.switch input:checked+.slider {
+    background: var(--neon-cyan) !important;
+}
+
+.slider {
+    background: rgba(0, 231, 255, 0.15) !important;
+    border: 1px solid rgba(0, 231, 255, 0.3) !important;
+}
+
+/* Popover list */
+.more-menu {
+    background: var(--panel-bg) !important;
+    border: 1px solid var(--panel-border) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+}
+
+.more-menu-item {
+    color: #9be8ef !important;
+}
+
+.more-menu-item:hover {
+    background: rgba(0, 231, 255, 0.1) !important;
+    color: var(--neon-cyan) !important;
+}
+
+/* 10. Send Message Button Cyberpunk Override */
+.send-message-btn {
+    background: rgba(0, 231, 255, 0.11) !important;
+    border: 1px solid rgba(0, 231, 255, 0.5) !important;
+    box-shadow: 0 0 10px rgba(0, 231, 255, 0.15) !important;
+    transition: all 0.3s ease !important;
+}
+
+.send-message-btn:hover {
+    background: rgba(0, 231, 255, 0.25) !important;
+    box-shadow: 0 0 18px rgba(0, 231, 255, 0.35) !important;
+    transform: translateY(-2px) !important;
+}
+
+.send-message-btn:active {
+    transform: scale(0.95) translateY(0) !important;
+    box-shadow: 0 0 8px rgba(0, 231, 255, 0.2) !important;
+}
+
+.send-message-btn .text {
+    fill: var(--neon-cyan) !important;
+}
+
+/* 11. File Upload Modal & Elements (Glassmorphism & Neon) */
+.file-upload-container {
+    background: var(--panel-bg) !important;
+    border: 1px solid var(--panel-border) !important;
+    box-shadow: 0 0 25px rgba(0, 231, 255, 0.25), inset 0 0 12px rgba(0, 231, 255, 0.05), 0 16px 60px rgba(0, 0, 0, 0.28) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+}
+
+.file-upload-header, .file-upload-footer {
+    border-color: rgba(0, 231, 255, 0.2) !important;
+    background: transparent !important;
+}
+
+.file-upload-header h3 {
+    color: var(--neon-cyan) !important;
+    font-family: 'Orbitron', 'Noto Sans SC', sans-serif !important;
+    text-shadow: 0 0 8px rgba(0, 231, 255, 0.4) !important;
+}
+
+.file-upload-close {
+    color: var(--neon-cyan) !important;
+}
+
+.file-upload-close:hover {
+    background: rgba(0, 231, 255, 0.15) !important;
+    color: #fff !important;
+}
+
+.file-drop-zone {
+    border: 2px dashed rgba(0, 231, 255, 0.3) !important;
+    background: rgba(0, 231, 255, 0.03) !important;
+    color: rgba(0, 231, 255, 0.7) !important;
+}
+
+.file-drop-zone:hover, .file-drop-zone.drag-over {
+    border-color: var(--neon-cyan) !important;
+    background: rgba(0, 231, 255, 0.08) !important;
+}
+
+.file-drop-text p {
+    color: rgba(0, 231, 255, 0.7) !important;
+}
+
+.file-drop-text p:first-child {
+    color: var(--neon-cyan) !important;
+}
+
+.file-browse-btn {
+    color: var(--neon-cyan) !important;
+    text-shadow: 0 0 4px rgba(0, 231, 255, 0.3);
+}
+
+.file-browse-btn:hover {
+    color: #fff !important;
+    text-shadow: 0 0 8px var(--neon-cyan);
+}
+
+.file-item {
+    background: rgba(0, 231, 255, 0.05) !important;
+    border: 1px solid rgba(0, 231, 255, 0.15) !important;
+    color: #9be8ef !important;
+}
+
+.file-item-name {
+    color: var(--neon-cyan) !important;
+}
+
+.file-item-size {
+    color: rgba(0, 231, 255, 0.6) !important;
+}
+
+.file-item-remove {
+    color: var(--neon-red) !important;
+}
+
+.file-item-remove:hover {
+    background: rgba(255, 51, 95, 0.15) !important;
+}
+
+.file-upload-cancel-btn {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid rgba(0, 231, 255, 0.14) !important;
+    color: #9bc9ce !important;
+}
+
+.file-upload-cancel-btn:hover {
+    background: rgba(255, 255, 255, 0.08) !important;
+}
+
+.file-upload-send-btn {
+    background: rgba(0, 231, 255, 0.11) !important;
+    border: 1px solid rgba(0, 231, 255, 0.6) !important;
+    color: var(--neon-cyan) !important;
+    box-shadow: none !important;
+    text-shadow: 0 0 4px rgba(0, 231, 255, 0.3) !important;
+}
+
+.file-upload-send-btn:hover:not(:disabled) {
+    background: rgba(0, 231, 255, 0.2) !important;
+    box-shadow: 0 0 15px rgba(0, 231, 255, 0.3) !important;
+}
+
+/* 12. File Message & Progress Cyberpunk Overrides */
+.file-message {
+    color: #dffcff !important;
+}
+
+.file-name {
+    color: var(--neon-cyan) !important;
+}
+
+.file-meta {
+    color: rgba(0, 231, 255, 0.6) !important;
+}
+
+.file-download-btn {
+    background: rgba(0, 231, 255, 0.12) !important;
+    border: 1px solid rgba(0, 231, 255, 0.5) !important;
+    color: var(--neon-cyan) !important;
+}
+
+.file-download-btn:hover {
+    background: rgba(0, 231, 255, 0.25) !important;
+    box-shadow: 0 0 10px rgba(0, 231, 255, 0.3) !important;
+}
+
+.file-progress-bar {
+    background: rgba(0, 231, 255, 0.1) !important;
+}
+
+.file-progress {
+    background: linear-gradient(90deg, rgba(0, 231, 255, 0.6), var(--neon-cyan)) !important;
+}
+
+.file-status {
+    background: rgba(0, 231, 255, 0.05) !important;
+    color: rgba(0, 231, 255, 0.8) !important;
+    border: 1px solid rgba(0, 231, 255, 0.1) !important;
+}
+
+/* 13. Private Chat Mode Neon Purple Styling */
+:root {
+    --neon-purple: #bd00ff;
+}
+
+.member.private-chat-active {
+    background: rgba(189, 0, 255, 0.12) !important;
+    border: 1px solid rgba(189, 0, 255, 0.56) !important;
+    color: #f3d5ff !important;
+    box-shadow: inset 0 0 14px rgba(189, 0, 255, 0.08) !important;
+}
+
+.chat-input-area.private-mode .chat-input-wrapper {
+    border-color: rgba(189, 0, 255, 0.4) !important;
+    box-shadow: 0 0 18px rgba(189, 0, 255, 0.2) !important;
+}
+
+.bubble.me.private-message {
+    background: rgba(189, 0, 255, 0.15) !important;
+    border: 1px solid rgba(189, 0, 255, 0.45) !important;
+    color: #f9f0ff !important;
+    box-shadow: inset 0 0 10px rgba(189, 0, 255, 0.05), 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+.bubble.other.private-message {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid rgba(189, 0, 255, 0.25) !important;
+    color: #f9f0ff !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+}
+
+.bubble.other.private-message .bubble-other-name {
+    color: #e2abff !important;
+}
+
+.bubble.private-message .file-message .file-download-btn {
+    background: rgba(189, 0, 255, 0.15) !important;
+    border-color: rgba(189, 0, 255, 0.5) !important;
+    color: #e2abff !important;
+    box-shadow: 0 2px 8px rgba(189, 0, 255, 0.2) !important;
+}
+
+.bubble.private-message .file-message .file-download-btn:hover {
+    background: rgba(189, 0, 255, 0.3) !important;
+    box-shadow: 0 4px 16px rgba(189, 0, 255, 0.4) !important;
+}
+
+.bubble.private-message .file-message .file-progress {
+    background: linear-gradient(90deg, rgba(189, 0, 255, 0.6), #e2abff) !important;
+}
+
+.bubble.private-message .file-message .file-status {
+    background: rgba(189, 0, 255, 0.05) !important;
+    border-color: rgba(189, 0, 255, 0.1) !important;
+    color: #f9f0ff !important;
+}
+
+/* 14. Image Preview & Modal Custom Styling */
+.img-modal-bg {
+    background: rgba(2, 6, 13, 0.9) !important;
+    backdrop-filter: blur(12px) !important;
+}
+
+.img-modal-close {
+    color: var(--neon-cyan) !important;
+}
+
+.img-modal-close:hover {
+    background: rgba(0, 231, 255, 0.15) !important;
+    color: #fff !important;
+}
+
+.input-image-preview {
+    background: rgba(0, 231, 255, 0.05) !important;
+    border: 1px solid rgba(0, 231, 255, 0.2) !important;
+}
+
+.input-image-preview:hover {
+    border-color: var(--neon-cyan) !important;
+    box-shadow: 0 0 8px rgba(0, 231, 255, 0.2) !important;
+}
+
+/* 15. Emoji Picker Cyberpunk Aesthetics */
+emoji-picker {
+    --background: rgba(8, 14, 26, 0.92) !important;
+    --border-color: var(--panel-border) !important;
+    --indicator-color: var(--neon-cyan) !important;
+    --title-color: var(--neon-cyan) !important;
+    --search-background: rgba(0, 231, 255, 0.05) !important;
+    --search-placeholder-color: rgba(0, 231, 255, 0.4) !important;
+    --input-border-color: rgba(0, 231, 255, 0.26) !important;
+    --input-color: var(--neon-cyan) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 0 18px rgba(0, 231, 255, 0.14) !important;
+    backdrop-filter: blur(16px) !important;
+}
+
+/* 16. Custom Scrollbars */
+::-webkit-scrollbar {
+    width: 6px !important;
+    height: 6px !important;
+    background: transparent !important;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent !important;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 231, 255, 0.22) !important;
+    border-radius: 999px !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 231, 255, 0.4) !important;
+}
+
+/* 17. Application Logo Title Styling */
+.app-header-logo {
+    text-align: center !important;
+    margin-top: 10px !important;
+    margin-bottom: 30px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 8px !important;
+}
+
+.app-subtitle-top {
+    font-size: 0.72rem !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.22em !important;
+    color: rgba(138, 224, 233, 0.76) !important;
+    margin: 0 !important;
+    font-family: 'Orbitron', 'Noto Sans SC', sans-serif !important;
+    font-weight: 500 !important;
+}
+
+.app-title-main {
+    font-family: 'Orbitron', sans-serif !important;
+    font-size: 2.3rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.28em !important;
+    background: linear-gradient(135deg, #00e7ff 0%, #00bcff 60%, #bd00ff 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    color: transparent !important;
+    margin: 0 !important;
+    text-shadow: 0 0 15px rgba(0, 231, 255, 0.25) !important;
+    line-height: 1.2 !important;
+    padding-left: 0.28em !important; /* Center compensation for letter spacing */
+}
+
+.app-subtitle-bottom {
+    font-size: 0.88rem !important;
+    color: rgba(0, 231, 255, 0.6) !important;
+    margin: 0 !important;
+    max-width: 380px !important;
+    line-height: 1.5 !important;
+    font-family: 'Noto Sans SC', sans-serif !important;
+}

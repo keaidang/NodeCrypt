@@ -1,4 +1,4 @@
-# NodeCrypt
+# AegisChat
 
 🌐 **[中文版 README](README.md)**
 
@@ -7,7 +7,7 @@
 ### Method 1: One-Click Deploy to Cloudflare Workers
 
 Click the button below for one-click deployment to Cloudflare Workers:
-[![Deploy to Cloudflare Workers](https://deploy.workers.cloudflare.com/button?projectName=NodeCrypt)](https://deploy.workers.cloudflare.com/?url=https://github.com/shuaiplus/NodeCrypt)
+[![Deploy to Cloudflare Workers](https://deploy.workers.cloudflare.com/button?projectName=AegisChat)](https://deploy.workers.cloudflare.com/?url=https://github.com/keaidang/NodeCrypt)
 > Note: This method creates a new project based on the main repository. Future updates to the main repository will not be automatically synchronized.
 
 ### Method 2: Auto-Sync Fork and Deploy (Recommended for Long-term Maintenance)
@@ -18,7 +18,7 @@ Click the button below for one-click deployment to Cloudflare Workers:
 ### Method 3: Docker One-Click Deployment (Recommended for Self-hosting)
 
 ```bash
-docker run -d --name nodecrypt -p 80:80 ghcr.io/shuaiplus/nodecrypt
+docker run -d --name aegischat -p 80:80 ghcr.io/keaidang/nodecrypt
 ```
 
 Access http://localhost:80
@@ -29,7 +29,7 @@ Use `npm run deploy` to deploy to Cloudflare Workers.
 
 ## 📝 Project Introduction
 
-NodeCrypt is a truly end-to-end encrypted chat system that implements a complete zero-knowledge architecture. The entire system design ensures that servers, network intermediaries, and even system administrators cannot access any plaintext message content. All encryption and decryption operations are performed locally on the client side, with the server serving only as a blind relay for encrypted data.
+AegisChat is a truly end-to-end encrypted chat system that implements a complete zero-knowledge architecture. The entire system design ensures that servers, network intermediaries, and even system administrators cannot access any plaintext message content. All encryption and decryption operations are performed locally on the client side, with the server serving only as a blind relay for encrypted data.
 
 ### System Architecture
 - **Frontend**: ES6+ modular JavaScript, no framework dependencies
@@ -165,6 +165,6 @@ This project is for educational and technical research purposes only and must no
 
 ---
 
-**NodeCrypt** - True End-to-End Encrypted Communication 🔐
+**AegisChat** - True End-to-End Encrypted Communication 🔐
 
 *"In the digital age, encryption is the last line of defense for privacy"*
