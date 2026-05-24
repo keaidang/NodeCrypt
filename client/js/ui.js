@@ -8,7 +8,8 @@ import {
 	roomsData,
 	activeRoomIndex,
 	togglePrivateChat,
-	exitRoom
+	exitRoom,
+	setSidebarAvatar
 } from './room.js';
 import {
 	escapeHTML
@@ -23,7 +24,8 @@ import {
 	t
 } from './util.i18n.js';
 import {
-	updateChatInputStyle
+	updateChatInputStyle,
+	renderChatArea
 } from './chat.js';
 
 // Utility functions for security and error handling
@@ -315,7 +317,8 @@ export function createUserItem(user, isMe) {
 	div.innerHTML = `<span class="avatar"></span><div class="member-info"><div class="member-name">${safeUserName}${isMe?t('ui.me', ' (me)'):''}</div></div>`;
 	const avatarEl = div.querySelector('.avatar');
 	if (avatarEl) {
-		const svg = createAvatarSVG(rawName);
+		const customColor = isMe ? (localStorage.getItem('nodecrypt_avatar_color_' + rawName) || '') : (user.avatarColor || '');
+		const svg = createAvatarSVG(rawName, customColor);
 		const cleanSvg = svg.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
 		avatarEl.innerHTML = cleanSvg
 	}
@@ -647,3 +650,97 @@ export function initFlipCard() {
 		toggleFlip();
 	});
 }
+
+// Avatar Color Picker Logic
+let currentPopover = null;
+
+function selectAvatarColor(color) {
+	const rd = roomsData[activeRoomIndex];
+	if (!rd) return;
+
+	const myName = rd.myUserName;
+	localStorage.setItem('nodecrypt_avatar_color_' + myName, color);
+
+	// Update local sidebar
+	setSidebarAvatar(myName);
+
+	// Update local user list
+	renderUserList(false);
+
+	// Redraw chat area
+	renderChatArea();
+
+	// Broadcast this change to all other clients in the channel
+	if (rd.chat && typeof rd.chat.sendChannelMessage === 'function') {
+		rd.chat.sendChannelMessage('avatar_color', color);
+	}
+}
+
+function openAvatarColorPicker(avatarEl) {
+	if (currentPopover) {
+		currentPopover.remove();
+		currentPopover = null;
+	}
+
+	const rd = roomsData[activeRoomIndex];
+	if (!rd) return;
+
+	const myName = rd.myUserName;
+	const currentBgColor = localStorage.getItem('nodecrypt_avatar_color_' + myName) || '';
+
+	const popover = document.createElement('div');
+	popover.className = 'avatar-color-picker-popover';
+
+	const colors = ["f87171", "fb923c", "09acf4", "f472b6", "a78bfa", "34d399"];
+	
+	colors.forEach(color => {
+		const circle = document.createElement('div');
+		circle.className = 'avatar-color-circle' + (currentBgColor === color ? ' active' : '');
+		circle.style.backgroundColor = '#' + color;
+		circle.onclick = (e) => {
+			e.stopPropagation();
+			selectAvatarColor(color);
+			popover.remove();
+			currentPopover = null;
+		};
+		popover.appendChild(circle);
+	});
+
+	document.body.appendChild(popover);
+	currentPopover = popover;
+
+	// Position near avatarEl
+	const rect = avatarEl.getBoundingClientRect();
+	const popoverHeight = 44;
+	const popoverWidth = 200;
+	
+	let top = rect.top - popoverHeight - 8 + window.scrollY;
+	let left = rect.left + (rect.width / 2) - (popoverWidth / 2) + window.scrollX;
+
+	if (top < 0) {
+		top = rect.bottom + 8 + window.scrollY;
+	}
+	if (left < 0) left = 8;
+	if (left + popoverWidth > window.innerWidth) {
+		left = window.innerWidth - popoverWidth - 8;
+	}
+
+	popover.style.top = top + 'px';
+	popover.style.left = left + 'px';
+
+	setTimeout(() => {
+		popover.classList.add('show');
+	}, 10);
+}
+
+// Global listeners for color picker
+document.addEventListener('click', (e) => {
+	const avatarTarget = e.target.closest('#sidebar-user-avatar, .member.me .avatar');
+	if (avatarTarget) {
+		e.stopPropagation();
+		openAvatarColorPicker(avatarTarget);
+	} else if (currentPopover && !currentPopover.contains(e.target)) {
+		currentPopover.remove();
+		currentPopover = null;
+	}
+});

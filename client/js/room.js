@@ -64,7 +64,8 @@ export function switchRoom(index) {
 // 设置侧边栏头像
 export function setSidebarAvatar(userName) {
 	if (!userName) return;
-	const svg = createAvatarSVG(userName);
+	const customColor = localStorage.getItem('nodecrypt_avatar_color_' + userName) || '';
+	const svg = createAvatarSVG(userName, customColor);
 	const el = $id('sidebar-user-avatar');
 	if (el) {
 		const cleanSvg = svg.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
@@ -135,7 +136,8 @@ export function joinRoom(userName, roomName, password, modal = null, onResult) {
 		onClientMessage: (msg) => handleClientMessage(idx, msg)
 	};
 	const chatInst = new window.NodeCrypt(window.config, callbacks);
-	chatInst.setCredentials(userName, roomName, password);
+	const customColor = localStorage.getItem('nodecrypt_avatar_color_' + userName) || '';
+	chatInst.setCredentials(userName, roomName, password, customColor);
 	chatInst.connect();
 	roomsData[idx].chat = chatInst
 }
@@ -232,17 +234,29 @@ export function handleClientLeft(idx, clientId) {
 }
 
 // Handle client message event
-// 处理客户端消息事件
+// 处理客户端 message 事件
 export function handleClientMessage(idx, msg) {
 	const newRd = roomsData[idx];
 	if (!newRd) return;
+
+	let msgType = msg.type || 'text';
+
+	if (msgType === 'avatar_color') {
+		const user = newRd.userMap[msg.clientId];
+		if (user) {
+			user.avatarColor = msg.data;
+			if (activeRoomIndex === idx) {
+				renderUserList(false);
+				renderChatArea();
+			}
+		}
+		return;
+	}
 
 	// Prevent processing own messages unless it's a private message sent to oneself
 	if (msg.clientId === newRd.myId && msg.userName === newRd.myUserName && !msg.type.includes('_private')) {
 		return;
 	}
-
-	let msgType = msg.type || 'text';
 
 	// Handle file messages
 	if (msgType.startsWith('file_')) {

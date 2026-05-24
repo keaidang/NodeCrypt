@@ -194,7 +194,17 @@ export function addOtherMsg(msg, userName = '', avatar = '', isHistory = false, 
 		bubbleClasses += ' file-bubble';
 	}
 	bubbleWrap.innerHTML = `<span class="avatar"></span><div class="bubble-other-main"><div class="${bubbleClasses}"><div class="bubble-other-name">${safeUserName}</div><span class="bubble-content">${contentHtml}</span><span class="bubble-meta">${time}</span></div></div>`;
-	const svg = createAvatarSVG(userName);
+	let customColor = '';
+	if (activeRoomIndex >= 0) {
+		const rd = roomsData[activeRoomIndex];
+		if (rd) {
+			const foundUser = rd.userList.find(u => (u.userName || u.username || u.name) === userName);
+			if (foundUser) {
+				customColor = foundUser.avatarColor || '';
+			}
+		}
+	}
+	const svg = createAvatarSVG(userName, customColor);
 	const avatarEl = $('.avatar', bubbleWrap);
 	if (avatarEl) {
 		const cleanSvg = svg.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');

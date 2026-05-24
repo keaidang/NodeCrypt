@@ -1,4 +1,4 @@
-﻿// NodeCrypt core cryptographic client for secure chat
+// NodeCrypt core cryptographic client for secure chat
 // NodeCrypt 安全聊天的核心加密客户端
 
 import {
@@ -74,13 +74,14 @@ class NodeCrypt {
 
 	// Set user credentials (username, channel, password)
 	// 设置用户凭证（用户名、频道、密码）
-	setCredentials(username, channel, password) {
+	setCredentials(username, channel, password, avatarColor = '') {
 		this.logEvent('setCredentials');
 		try {
 			this.credentials = {
 				username: username,
 				channel: sha256(channel),
-				password: sha256(password)
+				password: sha256(password),
+				avatarColor: avatarColor
 			}
 		} catch (error) {
 			this.logEvent('setCredentials', error, 'error');
@@ -304,7 +305,10 @@ class NodeCrypt {
 					a: 'c',
 					p: this.encryptClientMessage({
 						a: 'u',
-						p: this.credentials.username
+						p: {
+							username: this.credentials.username,
+							avatarColor: this.credentials.avatarColor || ''
+						}
 					}, this.channel[serverDecrypted.c].shared),
 					c: serverDecrypted.c
 				}, this.serverShared))
@@ -319,19 +323,33 @@ class NodeCrypt {
 			if (!this.isObject(clientDecrypted) || !this.isString(clientDecrypted.a)) {
 				return
 			}
-			if (clientDecrypted.a === 'u' && this.isString(clientDecrypted.p) && clientDecrypted.p.match(/\S+/) && !this.channel[serverDecrypted.c].username) {
-				this.channel[serverDecrypted.c].username = clientDecrypted.p.replace(/^\s+/, '').replace(/\s+$/, '');
-				if (this.callbacks.onClientSecured) {
-					try {
-						this.callbacks.onClientSecured({
-							clientId: serverDecrypted.c,
-							username: this.channel[serverDecrypted.c].username
-						})
-					} catch (error) {
-						this.logEvent('onMessage-client-secured-callback', error, 'error')
-					}
+			if (clientDecrypted.a === 'u' && !this.channel[serverDecrypted.c].username) {
+				let userNameVal = '';
+				let avatarColorVal = '';
+				if (this.isObject(clientDecrypted.p)) {
+					userNameVal = clientDecrypted.p.username;
+					avatarColorVal = clientDecrypted.p.avatarColor;
+				} else if (this.isString(clientDecrypted.p)) {
+					userNameVal = clientDecrypted.p;
 				}
-				return
+				if (userNameVal && userNameVal.match(/\S+/)) {
+					this.channel[serverDecrypted.c].username = userNameVal.replace(/^\s+/, '').replace(/\s+$/, '');
+					if (avatarColorVal) {
+						this.channel[serverDecrypted.c].avatarColor = avatarColorVal;
+					}
+					if (this.callbacks.onClientSecured) {
+						try {
+							this.callbacks.onClientSecured({
+								clientId: serverDecrypted.c,
+								username: this.channel[serverDecrypted.c].username,
+								avatarColor: avatarColorVal
+							})
+						} catch (error) {
+							this.logEvent('onMessage-client-secured-callback', error, 'error')
+						}
+					}
+					return
+				}
 			}			if (!this.channel[serverDecrypted.c].username) {
 				return
 			}

@@ -4,7 +4,7 @@ import * as dicebearCore from '@dicebear/core';
 import * as dicebearMicah from '@dicebear/micah';
 // Predefined background colors
 // 预设背景色数组
-const bgColors = ["f87171", "fb923c", "09acf4", "fb923c", "f472b6", "a78bfa", "34d399"];
+const bgColors = ["f87171", "fb923c", "09acf4", "f472b6", "a78bfa", "34d399"];
 // Pick a color based on seed string
 // 根据种子字符串选择颜色
 function pickColor(seed) {
@@ -14,10 +14,11 @@ function pickColor(seed) {
 }
 // Create SVG avatar for user name
 // 为用户名生成 SVG 头像
-export function createAvatarSVG(userName) {
+export function createAvatarSVG(userName, customColor = '') {
+	const finalColor = customColor || pickColor(userName);
 	return dicebearCore.createAvatar(dicebearMicah, {
 		seed: userName,
 		baseColor: ["f7e1c3", "f9c9b6", "f2d6cb", "f8ce8e", "eac393"],
-		backgroundColor: [pickColor(userName)]
+		backgroundColor: [finalColor]
 	}).toString()
 }
