@@ -240,6 +240,18 @@ export function setupMobileUIHandlers() {
 	}
 	updateMobileBtnDisplay();
 	window.addEventListener('resize', updateMobileBtnDisplay);
+
+	function closeMobilePanels() {
+		if (sidebar) sidebar.classList.remove('mobile-open');
+		if (rightbar) rightbar.classList.remove('mobile-open');
+		if (sidebarMask) sidebarMask.classList.remove('active');
+		if (rightbarMask) rightbarMask.classList.remove('active');
+		setTimeout(() => {
+			void document.body.offsetWidth;
+			window.dispatchEvent(new Event('resize'));
+		}, 50);
+	}
+
 	if (mobileMenuBtn && sidebar && sidebarMask) {
 		mobileMenuBtn.onclick = function(e) {
 			e.stopPropagation();
@@ -250,8 +262,7 @@ export function setupMobileUIHandlers() {
 			if (settingsSidebar && settingsSidebar.classList.contains('mobile-open')) {
 				closeSettingsPanel();
 			} else {
-				sidebar.classList.remove('mobile-open');
-				sidebarMask.classList.remove('active');
+				closeMobilePanels();
 			}
 		}
 	}
