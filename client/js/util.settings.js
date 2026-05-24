@@ -87,6 +87,7 @@ function setupSettingsPanel() {
 	if (!settingsSidebar || !settingsContent) return;
 
 	const settings = loadSettings();
+	const currentLang = settings.language || getCurrentLanguage();
 	
 	// Update settings title
 	// 更新设置标题
@@ -123,8 +124,8 @@ function setupSettingsPanel() {
 				</div>
 				<div class="language-selector">
 					<select id="settings-language" class="language-select">
-						<option value="en" ${settings.language === 'en' ? 'selected' : ''}>🇺🇸 English</option>
-						<option value="zh" ${settings.language === 'zh' ? 'selected' : ''}>🇨🇳 中文</option>
+						<option value="en" ${currentLang === 'en' ? 'selected' : ''}>🇺🇸 English</option>
+						<option value="zh" ${currentLang === 'zh' ? 'selected' : ''}>🇨🇳 中文</option>
 					</select>
 				</div>
 			</div>
